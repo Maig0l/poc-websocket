@@ -7,9 +7,13 @@ main {
 #messageList {
   flex: 1;
   overflow-y: scroll;
+}
+
+#messageList > li {
   overflow-anchor: none;
 }
 
 #messageList > .anchor {
   height: 1px;
+  overflow-anchor: auto;
 }

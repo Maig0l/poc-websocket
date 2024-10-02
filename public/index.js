@@ -26,3 +26,12 @@ document.querySelector('#send').addEventListener('click', (e) => {
 // The client also listens for 'message' type events, and responds
 //  by adding the payload to the HTML list.
 socket.on('message', (text) => addMsgToList(text));
+
+list.addEventListener('overflow', function scrollAnchorTriggerer(ev) {
+  list.scroll(0, list.scrollHeight);
+
+  // Due to the way scroll anchoring works, we want JS to scroll to the bottom
+  // (where the anchor is) only once. We don't need this event listener anymore
+  // https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
+  list.removeEventListener('overflow', scrollAnchorTriggerer);
+});

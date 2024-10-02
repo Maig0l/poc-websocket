@@ -1,15 +1,20 @@
 const socket = io();
 
+const list = document.querySelector('#messageList');
+const listAnchor = document.querySelector('#messageList > .anchor');
+const textInput = document.querySelector('#textIn');
+
 function addMsgToList(x) {
-  const list = document.querySelector('#messageList');
   const el = document.createElement('li');
 
   el.innerHTML = x;
-  list.appendChild(el);
+  list.insertBefore(el, listAnchor);
 }
 
-document.querySelector('#send').addEventListener('click', () => {
-  const text = document.querySelector('#textIn').value;
+document.querySelector('#send').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const text = textInput.value;
   console.log(`Sending "${text}"`);
 
   // We send an event of type 'message' with `text` as the content.

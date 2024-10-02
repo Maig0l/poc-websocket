@@ -3,18 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebSocket Proof of Concept</title>
+  <title>Discord 2: Anonymous version</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.indigo.min.css" >
+  <link rel="stylesheet" href="style.css">
 
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   <script defer src="index.js"></script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
+  <main class="container">
+    <h1>Discord 2</h1>
 
-  <input type="text" id="textIn" />
-  <button id="send">Enviar</button>
+    <ul id="messageList">
+      <span class="anchor"></span>
+    </ul>
 
-  <ul id="messageList">
-  </ul>
+    <form id="messageForm">
+      <fieldset role="group">
+        <input type="text" id="textIn" />
+        <button id="send">Enviar</button>
+      </fieldset>
+    </for>
+  </main>
 </body>
 </html>

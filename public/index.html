@@ -4,8 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebSocket Proof of Concept</title>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script defer src="index.js"></script>
 </head>
 <body>
   <h1>Hello, world!</h1>
+
+  <input type="text" id="textIn" />
+  <button id="send">Enviar</button>
+
+  <ul id="messageList">
+  </ul>
 </body>
 </html>

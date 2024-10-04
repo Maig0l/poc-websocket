@@ -1,0 +1,9 @@
+#messageList {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+}

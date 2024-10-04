@@ -31,24 +31,35 @@ app.get('/:file', (req, res, next) => {
   })
 })
 
+setInterval(() => {
+  const stamp = (new Date).toTimeString();
+  console.log(`< ${stamp} - ${io.engine.clientsCount} clients`)
+
+  io.emit('time', stamp);
+}, 4500)
+
 // For every new connection to the Socket.io server, we have a `socket` object
 // representing that connection
 io.on('connection', (socket) => {
-  console.log(`New connection established: ${socket.id}`)
+  const sockSlug = socket.id.substring(0, 5)
+  console.log(`+ New connection established: ${sockSlug}`)
+  io.emit('userCount', io.engine.clientsCount)
 
   socket.on('disconnect', () => {
-    console.log(`Client ${socket.id} disconnected`)
+    console.log(`- Client ${sockSlug} disconnected`)
+    io.emit('userCount', io.engine.clientsCount)
   })
 
   // 'message' is an arbitrary event name we can define
   //  and listen for in the server.
   // Message events are sent by the client
   socket.on('message', (messageText) => {
-    console.log(`${socket.id} says: ${messageText}`)
+    console.log(`> ${sockSlug} says: ${messageText}`)
 
     // We emit a message event from the Socket.io server itself
     // to broadcast the event to _all_ clients
     io.emit('message', messageText)
+    console.log(`< Broadcasting "${messageText}"`)
   })
 })
 

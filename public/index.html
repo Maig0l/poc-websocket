@@ -5,16 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebSocket Proof of Concept</title>
 
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.indigo.min.css" >
+  <link rel="stylesheet" href="style.css">
+
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   <script defer src="index.js"></script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
+  <main class="container">
+    <header>
+      <h1>Time notification system</h1>
 
-  <input type="text" id="textIn" />
-  <button id="send">Enviar</button>
+      <span># of Users: <i id="userCount"></i></span>
+    </header>
 
-  <ul id="messageList">
-  </ul>
+    <button id="subscribe">Subscribe</button>
+
+    <ul id="messageList">
+    </ul>
+  </main>
 </body>
 </html>

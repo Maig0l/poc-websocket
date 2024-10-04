@@ -6,6 +6,9 @@ import { dirname, join } from 'node:path'
 import { Server } from 'socket.io';
 import { access } from 'node:fs';
 import cors from 'cors';
+import process from 'node:process';
+
+process.title = 'MTT-brand WS Server'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const __public = join(__dirname, "../public")
@@ -36,17 +39,15 @@ setInterval(() => {
   console.log(`< ${stamp} - ${io.engine.clientsCount} clients`)
 
   io.emit('time', stamp);
-}, 4500)
+}, 1000)
 
 // For every new connection to the Socket.io server, we have a `socket` object
 // representing that connection
 io.on('connection', (socket) => {
   const sockSlug = socket.id.substring(0, 5)
-  console.log(`+ New connection established: ${sockSlug}`)
   io.emit('userCount', io.engine.clientsCount)
 
   socket.on('disconnect', () => {
-    console.log(`- Client ${sockSlug} disconnected`)
     io.emit('userCount', io.engine.clientsCount)
   })
 
@@ -60,6 +61,10 @@ io.on('connection', (socket) => {
     // to broadcast the event to _all_ clients
     io.emit('message', messageText)
     console.log(`< Broadcasting "${messageText}"`)
+  })
+
+  socket.on('bench', (payload) => {
+    socket.emit('bench', payload)
   })
 })
 
